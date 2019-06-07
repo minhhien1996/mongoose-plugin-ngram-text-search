@@ -1,0 +1,30 @@
+{
+  "name": "mongoose-plugin-ngram-text-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/minhhien1996/mongoose-plugin-ngram-text-searchn#readme",
+  "keywords": [
+    "mongoose",
+    "text-search",
+    "fulltext",
+    "mongoose",
+    "mongoose-plugin",
+    "search",
+    "text",
+    "n-gram"
+  ],
+  
+  "author": "minhhien1996 <minhhien139@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minhhien1996/mongoose-plugin-ngram-text-search.git"
+  },
+  "dependencies": {
+    "wink-nlp-utils": "^2.0.5"
+  }
+}
