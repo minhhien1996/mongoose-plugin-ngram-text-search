@@ -12,10 +12,8 @@ const toNGrams = (str, nGramSizeMin, nGramSizeMax) => {
 };
 
 module.exports = function (schema, options) {
-  console.log('options', options);
-  // console.log('schema', schema);
-  const getNGramField = name => `${PREFIX}_${name}`;
-  const { fields = [], nGramSizeMin = 2, nGramSizeMax = 3, edgeNGrams = false } = options;
+  const { fields = [], nGramSizeMin = 2, nGramSizeMax = 3, fieldPrefix = PREFIX } = options;
+  const getNGramField = name => `${fieldPrefix}_${name}`;
   const textIndex = {};
   fields.forEach((fieldOpt) => {
     const {
