@@ -30,7 +30,7 @@ module.exports = function (schema, options) {
     textIndex[name] = 'text';
   });
 
-  schema.index(textIndex, { default_language: 'none' });
+  schema.index(textIndex, { default_language: 'none', name: PREFIX });
 
 
   schema.pre('save', function (next) {
