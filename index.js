@@ -27,6 +27,7 @@ module.exports = function (schema, options) {
       [getNGramField(name)]: { type: String },
     });
     textIndex[getNGramField(name)] = 'text';
+    textIndex[name] = 'text';
   });
 
   schema.index(textIndex, { default_language: 'none' });
