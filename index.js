@@ -42,8 +42,38 @@ module.exports = function (schema, options) {
       const value = isFunction(extractFn) ? extractFn(this[name]) : this[name];
       if (value) {
         this[fieldName] = toNGrams(value, nGramSizeMin, nGramSizeMax).join(' ');
+      } else {
+        this[fieldName] = '';
       }
     });
     next();
   });
+
+  const updateHookHandler = function (next) {
+    if (!this.getUpdate().$set) {
+      this.getUpdate().$set = {}
+    }
+    fields.forEach((fieldOpt) => {
+      const {
+        name, extractFn,
+      } = fieldOpt;
+      const fieldName = getNGramField(name);
+      const getter = key => this.getUpdate().$set[key] || this.getUpdate()[key];
+      const setter = (key, value) => this.getUpdate().$set[key] = value;
+      const updatedValue = getter(name)
+      if (updatedValue) {
+        const value = isFunction(extractFn) ? extractFn(updatedValue) : updatedValue;
+        if (value) {
+          setter(fieldName, toNGrams(value, nGramSizeMin, nGramSizeMax).join(' '));
+        } else {
+          setter(fieldName, '');
+        }
+      }
+    });
+    next();
+  };
+
+  schema.pre('findOneAndUpdate', updateHookHandler);
+
+  schema.pre('updateOne', updateHookHandler);
 };
